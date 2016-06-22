@@ -1,0 +1,30 @@
+extends ../shared/template
+
+//- block title
+//-   h1 Create a new ToDo task
+
+block content
+  h2 Create a New Task
+    i.fa.fa-plus-circle.fa-2x
+  .row
+    .col-xs-6
+      form(action='/tasks', method='post')
+        .form-group
+          label Name
+          input.form-control(type='text', name= 'name')
+        .form-group
+          label Due Date
+          input.form-control(type='date', name= 'due')
+        .form-group
+          label(for='p') Priority
+          select#p.form-control(name= 'priority')
+            each p in priorities
+              option(value=p.value)= p.name
+        .form-group
+          label(for='c') Category
+          select#c.form-control(name= 'category')
+            each c in categories
+              option(value=c.name)= c.name
+        .form-group
+              button.btn.btn-primary(type='submit') Save
+    .col-xs-6

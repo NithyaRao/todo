@@ -1,0 +1,41 @@
+extends  ../shared/template
+block content
+  .row
+    .col-xs-6
+      h1.text-center Task List
+      table.table.table-striped
+        thead(style='background-color:#67C1B8')
+          tr
+            th
+            th Name
+            th Due
+            th Priority
+            th Category
+            th Complete?
+            th Created
+            th
+        tbody
+          each task in showTasks
+            tr(style='background-color:' + task.priority.color)
+              td
+                form(action='/tasks/' + task.id + '/complete', method='post')
+                  button.btn.btn-primary(type='submit') Complete
+              td
+                =task.name
+              td
+                =task.due
+              td
+                =task.priority.name
+              td
+                =task.category
+              td
+                if task.isComplete
+                    i.fa.fa-check-square-o(aria-hidden='true')
+                else
+                    i.fa.fa-square-o(aria-hidden='true')
+              td
+                =task.createdAt
+              td
+                form(action='/tasks/' + task.id + '/delete', method='post')
+                  button.btn.btn-warning(type='submit') Delete
+    .col-xs-6
